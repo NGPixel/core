@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"sergio.sublime-project"
+			],
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"tab_size": 2,
+		"default_encoding": "UTF-8"
+	}
+}
