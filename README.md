@@ -1,2 +1,2 @@
-# sergio
-A modern UX framework for web applications
+# Requarks Core
+Shared classes, libraries and assets used in Requarks applications
