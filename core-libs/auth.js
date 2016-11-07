@@ -125,7 +125,7 @@ module.exports = function(passport, appconfig) {
 
 		db.User.count().then((c) => {
 			if(c < 1) {
-				winston.info('[' + PROCNAME + '][AUTH] No administrator account found. Creating a new one...');
+				winston.info('[AUTH] No administrator account found. Creating a new one...');
 				db.User.hashPassword('admin123').then((pwd) => {
 					return db.User.create({
 						provider: 'local',
@@ -140,9 +140,9 @@ module.exports = function(passport, appconfig) {
 						}]
 					});
 				}).then(() => {
-					winston.info('[' + PROCNAME + '][AUTH] Administrator account created successfully!');
+					winston.info('[AUTH] Administrator account created successfully!');
 				}).catch((err) => {
-					winston.error('[' + PROCNAME + '][AUTH] An error occured while creating administrator account:');
+					winston.error('[AUTH] An error occured while creating administrator account:');
 					winston.error(err);
 				});
 			}
