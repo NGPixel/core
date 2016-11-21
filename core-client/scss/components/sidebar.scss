@@ -6,6 +6,10 @@
 
 	aside {
 
+		&:last-child {
+			padding-bottom: 20px;
+		}
+
 		.sidebar-label {
 			padding: 0 0 5px 0;
 			color: mc('blue-grey', '400');

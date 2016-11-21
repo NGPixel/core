@@ -1,6 +1,10 @@
 
 .control {
 
+	// ===============================================================
+	// TEXTBOX
+	// ===============================================================
+
 	input[type=text], input[type=password] {
 		background-color: #FFF;
 		display: flex;
@@ -31,6 +35,64 @@
 
 	}
 
+	// ===============================================================
+	// CHECKBOX / RADIO BUTTONS
+	// ===============================================================
+
+	input[type=radio], input[type=checkbox] {
+		position: absolute;
+	  left: -9999px;
+	  opacity: 0;
+
+	  & + label {
+			position: relative;
+			padding: 0 15px 0 25px;
+			cursor: pointer;
+			display: inline-block;
+			height: 25px;
+			line-height: 25px;
+			font-size: 14px;
+			transition: .28s ease;
+			@include prefix('user-select', none);
+
+			&:before, &:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				margin: 4px;
+				border: 2px solid mc('light-blue', '600');
+				margin: 4px;
+		    width: 16px;
+		    height: 16px;
+		    border-radius: 50%;
+				z-index: 0;
+				transition: .28s ease;
+			}
+
+	  }
+
+	  &:checked + label {
+
+	  	&:before, &:after {
+				border-color: mc('light-blue', '600');
+			}
+
+			&:after {
+				@include prefix('transform', scale(0.5));
+				background-color: mc('light-blue', '600');
+			}
+
+	  }
+
+	}
+
+	input[type=checkbox] + label {
+		&:before, &:after {
+	    border-radius: 0;
+		}
+	}
+
 	.help {
 		font-size: 12px;
 
@@ -47,4 +109,18 @@
 	font-size: 14px;
 	font-weight: 500;
 	display: block;
+}
+
+.form-sections {
+
+	> section {
+		border-top: 1px solid mc('grey', '200');
+		padding: 20px;
+
+		&:first-child {
+			border-top: none;
+		}
+
+	}
+
 }
