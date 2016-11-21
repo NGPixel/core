@@ -1,40 +1,79 @@
 .modal {
 	align-items: flex-start;
 	display: none;
+
+	&.is-active {
+		display: block;
+	}
+
 }
 .modal-background {
-	animation: 0.4s ease fadeIn;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	background-color: rgba(0,0,0,0.85);
+	animation: .4s ease fadeIn;
+	z-index: 10;
+}
+.modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 11;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .modal-content {
-	animation: 0.4s ease slideInDown;
-}
+	animation: .3s ease zoomIn;
+	width: 600px;
+	background-color: #FFF;
 
-.card-header {
-	background-color: mc('teal', '500');
 
-	&.is-warning {
-		background-color: mc('orange', '500');
+	header {
+		background-color: mc('teal', '600');
+		color: #FFF;
+		font-weight: 400;
+		font-size: 16px;
+		padding: 10px 20px;
+
+		@each $color, $colorvalue in $material-colors {
+			&.is-#{$color} {
+				background-color: mc($color, '600');
+			}
+		}
 	}
 
-	&.is-danger {
-		background-color: mc('red', '500');
+	section {
+		padding: 20px;
+
+		.note {
+			display: block;
+			margin-top: 10px;
+			font-size: 14px;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+		}
+
 	}
 
-	&.is-info {
-		background-color: mc('purple', '500');
+	footer {
+		padding: 0 20px 20px;
+		text-align: right;
+
+		.button {
+			margin-left: 10px;
+		}
+
 	}
 
-}
-
-.card-header-title {
-	color: #FFF;
-	font-weight: 400;
-	font-size: 16px;
-	padding: 10px 20px;
-}
-
-.modal-content .card-footer-item {
-	font-weight: 500;
 }
 
 .modal-content .card-footer-item.featured {

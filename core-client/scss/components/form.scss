@@ -1,22 +1,50 @@
 
-input[type=text], input[type=password] {
-	background-color: #FFF;
-	display: flex;
-	height: 30px;
-	align-items: center;
-	padding: 0 12px;
-	border: 1px solid mc('grey', '400');
-	border-radius: 3px;
-	font-family: $core-font-standard;
-	font-size: 14px;
-	color: mc('grey', '700');
-	transition: all .4s ease;
-	box-shadow: inset 0 0 5px 0 rgba(0,0,0,0.1);
+.control {
 
-	&:focus {
-		outline: none;
-		border-color: mc('light-blue', '500');
-		box-shadow: inset 0 0 5px 0 rgba(mc('light-blue', '500'), 0.3);
+	input[type=text], input[type=password] {
+		background-color: #FFF;
+		display: flex;
+		height: 30px;
+		align-items: center;
+		padding: 0 12px;
+		border: 1px solid mc('grey', '400');
+		border-radius: 3px;
+		font-family: $core-font-standard;
+		font-size: 14px;
+		color: mc('grey', '700');
+		transition: all .4s ease;
+		box-shadow: inset 0 0 5px 0 rgba(0,0,0,0.1);
+
+		&:focus {
+			outline: none;
+			border-color: mc('light-blue', '500');
+			box-shadow: inset 0 0 5px 0 rgba(mc('light-blue', '500'), 0.3);
+		}
+
 	}
 
+	&.is-fullwidth {
+
+		input[type=text], input[type=password] {
+			width: 100%;
+		}
+
+	}
+
+	.help {
+		font-size: 12px;
+
+		&.is-red {
+			color: mc('red','600');
+		}
+
+	}
+
+}
+
+.label {
+	margin-bottom: 5px;
+	font-size: 14px;
+	font-weight: 500;
+	display: block;
 }
