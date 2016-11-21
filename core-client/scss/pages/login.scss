@@ -2,7 +2,7 @@
 body {
 	padding: 0;
 	margin: 0;
-	font-family: $sergio-font-standard;
+	font-family: $core-font-standard;
 	font-size: 14px;
 }
 
@@ -63,6 +63,7 @@ a {
 
 	h1 {
 		font-size: 4rem;
+		font-weight: bold;
 		color: #FFF;
 		padding: 0;
 		margin: 0;
@@ -122,15 +123,15 @@ a {
 
 		&:focus {
 			outline: none;
-			border-color: #FB8C00;
+			border-color: mc('orange','600');
 		}
 
 	}
 
 	button {
-		background-color: #FB8C00;
+		background-color: mc('orange','600');
 		color: #FFF;
-		border: 1px solid lighten(#FB8C00, 10%);
+		border: 1px solid lighten(mc('orange','600'), 10%);
 		border-radius: 3px;
 		height: 40px;
 		width: 125px;
@@ -140,13 +141,17 @@ a {
 		transition: all 0.4s ease;
 		cursor: pointer;
 
+		span {
+			font-weight: bold;
+		}
+
 		&:focus {
 			outline: none;
 			border-color: #FFF;
 		}
 
 		&:hover {
-			background-color: darken(#FB8C00, 10%);
+			background-color: darken(mc('orange','600'), 10%);
 		}
 
 	}
@@ -171,43 +176,43 @@ a {
 			}
 
 			&.ms {
-				background-color: #009688;
-				border-color: lighten(#009688, 10%);
+				background-color: mc('teal','600');
+				border-color: lighten(mc('teal','600'), 10%);
 
 				&:focus {
 					border-color: #FFF;
 				}
 
 				&:hover {
-					background-color: darken(#009688, 10%);
+					background-color: darken(mc('teal','600'), 10%);
 				}
 
 			}
 
 			&.google {
-				background-color: #2196F3;
-				border-color: lighten(#2196F3, 10%);
+				background-color: mc('light-blue','600');
+				border-color: lighten(mc('light-blue','600'), 10%);
 
 				&:focus {
 					border-color: #FFF;
 				}
 
 				&:hover {
-					background-color: darken(#2196F3, 10%);
+					background-color: darken(mc('light-blue','600'), 10%);
 				}
 
 			}
 
 			&.facebook {
-				background-color: #673AB7;
-				border-color: lighten(#673AB7, 10%);
+				background-color: mc('purple','600');
+				border-color: lighten(mc('purple','600'), 10%);
 
 				&:focus {
 					border-color: #FFF;
 				}
 
 				&:hover {
-					background-color: darken(#673AB7, 10%);
+					background-color: darken(mc('purple','600'), 10%);
 				}
 
 			}

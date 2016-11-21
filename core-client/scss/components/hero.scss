@@ -1,0 +1,18 @@
+.hero {
+	padding: 20px;
+	background-color: mc('grey', '50');
+	border-bottom: 1px solid mc('grey', '200');
+
+	h1 {
+		font-size: 28px;
+		color: mc('indigo', '500');
+		font-weight: 300;
+	}
+
+	h2 {
+		font-size: 18px;
+		color: mc('grey', '500');
+		font-weight: 400;
+	}
+
+}

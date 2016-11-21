@@ -1,0 +1,42 @@
+.modal {
+	align-items: flex-start;
+	display: none;
+}
+.modal-background {
+	animation: 0.4s ease fadeIn;
+}
+.modal-content {
+	animation: 0.4s ease slideInDown;
+}
+
+.card-header {
+	background-color: mc('teal', '500');
+
+	&.is-warning {
+		background-color: mc('orange', '500');
+	}
+
+	&.is-danger {
+		background-color: mc('red', '500');
+	}
+
+	&.is-info {
+		background-color: mc('purple', '500');
+	}
+
+}
+
+.card-header-title {
+	color: #FFF;
+	font-weight: 400;
+	font-size: 16px;
+	padding: 10px 20px;
+}
+
+.modal-content .card-footer-item {
+	font-weight: 500;
+}
+
+.modal-content .card-footer-item.featured {
+	animation: flash 4s ease 0 infinite;
+}
