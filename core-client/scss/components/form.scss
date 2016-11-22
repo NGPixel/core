@@ -25,12 +25,43 @@
 			box-shadow: inset 0 0 5px 0 rgba(mc('light-blue', '500'), 0.3);
 		}
 
+		&:disabled {
+			background-color: mc('grey', '100');
+		}
+
 	}
 
 	&.is-fullwidth {
 
-		input[type=text], input[type=password] {
+		input[type=text], input[type=password], select, textarea {
 			width: 100%;
+		}
+
+	}
+
+	// ===============================================================
+	// DROPDOWN
+	// ===============================================================
+
+	select {
+		background-color: #FFF;
+		display: flex;
+		height: 30px;
+		align-items: center;
+		padding: 0 12px;
+		border: 1px solid mc('grey', '400');
+		border-radius: 3px;
+		font-family: $core-font-standard;
+		font-size: 14px;
+		color: mc('grey', '700');
+		transition: all .4s ease;
+		box-shadow: inset 0 0 5px 0 rgba(0,0,0,0.1);
+		cursor: pointer;
+
+		&:focus {
+			outline: none;
+			border-color: mc('light-blue', '500');
+			box-shadow: inset 0 0 5px 0 rgba(mc('light-blue', '500'), 0.3);
 		}
 
 	}
@@ -61,7 +92,7 @@
 				left: 0;
 				top: 0;
 				margin: 4px;
-				border: 2px solid mc('light-blue', '600');
+				border: 2px solid mc($primary, '600');
 				margin: 4px;
 		    width: 16px;
 		    height: 16px;
@@ -75,12 +106,12 @@
 	  &:checked + label {
 
 	  	&:before, &:after {
-				border-color: mc('light-blue', '600');
+				border-color: mc($primary, '600');
 			}
 
 			&:after {
 				@include prefix('transform', scale(0.5));
-				background-color: mc('light-blue', '600');
+				background-color: mc($primary, '600');
 			}
 
 	  }
