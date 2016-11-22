@@ -1,13 +1,14 @@
 
 .nav {
 	align-items: stretch;
-	background-color: #FFF;
+	background-color: mc('indigo', '500');
 	display: flex;
 	min-height: 50px;
 	position: relative;
 	text-align: center;
-	box-shadow: 0 2px 3px rgba(#000, 0.1);
+	box-shadow: 0 2px 3px rgba(mc('indigo', '500'), 0.2);
 	z-index: 2;
+	color: #FFF;
 }
 
 .nav-left {
@@ -45,34 +46,107 @@
 	justify-content: center;
 	padding: 0 10px;
 
-	a {
-		flex-grow: 1;
+	// LINKS
+
+	@at-root .nav-item a, a.nav-item {
+		color: mc('indigo', '50');
+		transition: color .4s ease;
+		cursor: pointer;
+
+		&:hover {
+			color: mc('indigo', '200');
+			text-decoration: none;
+		}
+
 	}
+
+	// LOGO
 
 	img {
 		max-height: 34px;
 	}
 
+	// HEADERS
+
 	h1 {
-		font-size: 24px;
-		color: mc('grey', '600');
+		font-size: 16px;
+		font-weight: 400;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+		transition: color .4s ease;
+		color: #FFF;
+		padding-left: 10px;
+
+		i {
+			margin-right: 8px;
+		}
 
 		&:hover {
-			color: mc('grey', '800');
+			color: mc('indigo', '100');
 		}
 	}
 
+	@at-root h2.nav-item, .nav-item h2 {
+		color: mc('indigo', '50');
+	}
+
+	// BUTTONS
+
+	.button {
+		border: 1px solid mc('indigo', '900');
+		background-color: mc('indigo', '800');
+		transition: all .4s ease;
+		color: #FFF;
+		border-radius: 0;
+
+		&:first-child {
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+		}
+
+		&:last-child {
+			border-top-right-radius: 4px;
+			border-bottom-right-radius: 4px;
+		}
+
+		&.is-outlined {
+			background-color: mc('indigo', '600');
+			border-color: mc('indigo', '800');
+			color: mc('indigo', '100');
+		}
+
+		&:hover {
+			border-color: mc('indigo', '900');
+			background-color: mc('indigo', '900');
+			color: #FFF;
+		}
+
+	}
+
 	.button + .button {
-		margin-left: 10px;
+		margin-left: 1px;
 	}
-}
 
-.nav-item a, a.nav-item {
-	color: mc('grey', '500');
-	cursor: pointer;
+	// INPUTS
 
-	&:hover {
-		color: mc('light-blue', '700');
-		text-decoration: none;
+	.control {
+
+		input[type=text] {
+			background-color: mc('indigo', '800');
+			border-color: mc('indigo', '400');
+			color: mc('indigo', '50');
+
+			&:focus {
+				border-color: mc('indigo', '200');
+				box-shadow: inset 0 0 5px 0 rgba(mc('indigo', '900'), 0.5);
+			}
+
+			@include placeholder {
+				color: mc('indigo', '300');
+			}
+
+		}
+
 	}
+
 }
