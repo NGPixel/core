@@ -133,6 +133,14 @@
 
 	}
 
+	& + label {
+		margin-top: 20px;
+	}
+
+	> i:first-child {
+		margin-right: 8px;
+	}
+
 }
 
 .label {
@@ -144,7 +152,7 @@
 
 .form-sections {
 
-	> section {
+	section {
 		border-top: 1px solid mc('grey', '200');
 		padding: 20px;
 

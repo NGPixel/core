@@ -10,6 +10,14 @@ html {
   display: none;
 }
 
+body {
+	background-color: mc('blue-grey','100');
+}
+
+main {
+	background-color: #FFF;
+}
+
 a {
 	color: mc('indigo', '600');
 	text-decoration: none;
