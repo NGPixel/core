@@ -155,6 +155,7 @@
 	section {
 		border-top: 1px solid mc('grey', '200');
 		padding: 20px;
+		@include prefix(animation-duration, .6s);
 
 		&:first-child {
 			border-top: none;

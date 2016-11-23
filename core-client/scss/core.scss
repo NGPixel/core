@@ -9,4 +9,4 @@ $primary: 'indigo' !default;
 @import "base/fonts";
 @import "base/base";
 
-/*=include libs/animate.min.css */
+@import "libs/animate";
