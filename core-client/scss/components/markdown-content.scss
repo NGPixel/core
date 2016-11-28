@@ -175,6 +175,7 @@
 		box-shadow: inset 0 0 5px 0 rgba(mc('grey', '500'), 0.3);
 		padding: 20px;
 		font-family: $core-font-monospace;
+		white-space: pre;
 
 		> code {
 			box-shadow: inset 0 0 5px 0 mc('grey', '100');
@@ -182,6 +183,7 @@
 			font-weight: 400;
 			background-color: none;
 			color: mc('grey', '700');
+			padding: 0;
 		}
 
 	}
