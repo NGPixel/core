@@ -1,9 +1,13 @@
 
 .panel {
-	background-color: mc($primary,'800');
-	border: 1px solid mc($primary,'800');
+	background-color: mc('blue-grey', '800');
+	border: 1px solid mc('blue-grey', '800');
 	border-bottom-left-radius: 8px;
 	padding: 20px;
-	color: mc($primary,'50');
+	color: mc('blue-grey','100');
+
+	label {
+		color: #FFF;
+	}
 
 }
