@@ -60,6 +60,7 @@
 		background-color: mc('teal', '600');
 		color: #FFF;
 		display: flex;
+		flex-shrink: 0;
 		height: 40px;
 		align-items: center;
 		font-weight: 400;
@@ -115,6 +116,7 @@
 
 		&.is-gapless {
 			padding: 10px;
+			display: flex;
 		}
 
 		.note {
@@ -146,6 +148,7 @@
 	background-color: mc('teal', '700');
 	padding: 7px 20px;
 	display: flex;
+	flex-shrink: 0;
 	justify-content: center;
 
 	@each $color, $colorvalue in $material-colors {
@@ -202,12 +205,67 @@
 .modal-sidebar {
 
 	background-color: mc('teal', '50');
-	padding: 7px 20px;
+	padding: 0;
+	//padding: 7px 20px;
 
 	@each $color, $colorvalue in $material-colors {
 		&.is-#{$color} {
 			background-color: mc($color, '50');
+
+			.model-sidebar-header {
+				background-color: mc($color, '100');
+				color: mc($color, '800');
+			}
+
+			.model-sidebar-list > li a {
+				&:hover {
+					background-color: mc($color, '200');
+				}
+				&.is-active {
+					background-color: mc($color, '500');
+				}
+			}
+
 		}
+	}
+
+	.model-sidebar-header {
+		padding: 7px 20px;
+	}
+
+	.model-sidebar-content {
+		padding: 7px 20px;
+	}
+
+	.model-sidebar-list {
+
+		> li {
+			padding: 0;
+
+			a {
+				display: flex;
+				align-items: center;
+				height: 34px;
+				padding: 0 20px;
+				cursor: pointer;
+				color: mc('grey', '800');
+
+				&:hover {
+					background-color: mc('teal', '200');
+				}
+
+				&.is-active {
+					color: #FFF;
+				}
+
+				i {
+					margin-right: 7px;
+				}
+
+			}
+
+		}
+
 	}
 
 }
