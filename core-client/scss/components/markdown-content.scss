@@ -69,7 +69,9 @@
 
 	a.external-link {
 		position: relative;
-		padding-left: 20px;
+		padding-left: 5px;
+		display: inline-flex;
+		align-items: center;
 
 		&:before {
 			content: "\f08e";
@@ -79,19 +81,32 @@
 			text-decoration: inherit;
 			color: mc('grey', '500');
 			font-size: 14px;
-			position: absolute;
-			top: 0;
-			left: 0;
+			margin-right: 5px;
 		}
 
 	}
 
 	ul {
-		padding: 10px 40px;
-		list-style-type: disc;
+		padding: 10px 0 10px 40px;
+		list-style-type: square;
 
 		li {
 			padding: 1px 0;
+
+			> ul {
+				padding: 5px 0 5px 15px;
+				list-style-type: disc;
+			}
+
+			p {
+				padding: 0;
+
+				&:first-child {
+					padding: 0;
+				}
+
+			}
+
 		}
 
 	}
