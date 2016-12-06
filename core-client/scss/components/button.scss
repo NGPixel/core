@@ -52,6 +52,11 @@
 				color: mc($color,'700');
 			}
 
+			&.is-inverted {
+				background-color: transparent;
+				border-color: mc($color, '500');
+			}
+
 			&:hover {
 				background-color: mc($color,'800');
 				color: #FFF;
