@@ -53,21 +53,27 @@
 			}
 
 			&.is-inverted {
-				background-color: transparent;
+				background-color: rgba(mc($color, '800'), 0);
 				border-color: mc($color, '500');
 			}
 
 			&:hover {
 				background-color: mc($color,'800');
 				color: #FFF;
+				animation: none;
 			}
 		}
+
 	}
 
 	&.is-icon-only {
 		i {
 			margin-right: 0;
 		}
+	}
+
+	&.is-featured {
+		animation: btnInvertedPulse .6s ease alternate infinite;
 	}
 
 	&.is-disabled {
@@ -98,4 +104,13 @@
 
 	}
 
+}
+
+@include keyframes(btnInvertedPulse) {
+	0% {
+		background-color: rgba(mc('grey', '500'), 0);
+	}
+	100% {
+		background-color: rgba(mc('grey', '500'), 0.25);
+	}
 }
