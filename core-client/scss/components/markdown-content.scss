@@ -46,10 +46,15 @@
 		border-right: 5px solid mc('teal', '100');
 		margin-left: 20px;
 		padding-top: 1px;
+		padding-bottom: 20px;
 		overflow: hidden;
 
 		& + h1, & + h2 {
 			margin-top: 1px;
+		}
+
+		&:last-child {
+			padding-bottom: 5px;
 		}
 
 		h3:first-child {
@@ -76,9 +81,14 @@
 		border-right: 5px solid mc('teal', '100');
 		margin-left: 20px;
 		margin-right: 1px;
+		padding-bottom: 10px;
 
 		& + h1, & + h2, & + h3 {
 			margin-top: 1px;
+		}
+
+		&:last-child {
+			padding-bottom: 0;
 		}
 
 	}
