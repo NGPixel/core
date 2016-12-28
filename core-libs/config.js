@@ -15,18 +15,22 @@ module.exports = (confPath) => {
 	var appconfig = {};
 
 	try {
-	  appconfig = yaml.safeLoad(fs.readFileSync(confPath, 'utf8'));
+		appconfig = yaml.safeLoad(fs.readFileSync(confPath, 'utf8'));
 	} catch (ex) {
-	  winston.error(ex);
-	  process.exit(1);
+		winston.error(ex);
+		process.exit(1);
 	}
 
 	// Merge with defaults
 
 	appconfig = _.defaultsDeep(appconfig, {
-		title: "Requarks Wiki",
+		title: "Wiki",
 		host: "http://localhost",
 		port: process.env.PORT,
+		uploads: {
+			maxImageFileSize: 3,
+			maxOtherFileSize: 100
+		},
 		auth: {
 			local: { enabled: true },
 			microsoft: { enabled: false },
@@ -34,7 +38,6 @@ module.exports = (confPath) => {
 			facebook: { enabled: false },
 		},
 		db: "mongodb://localhost/wiki",
-		redis: null,
 		sessionSecret: null,
 		admin: null
 	});
@@ -47,7 +50,7 @@ module.exports = (confPath) => {
 	}
 	if(appconfig.authStrategies.list.length < 1) {
 		winston.error(new Error('You must enable at least 1 authentication strategy!'));
-	  process.exit(1);
+		process.exit(1);
 	}
 
 

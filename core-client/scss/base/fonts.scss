@@ -6,14 +6,15 @@
 // - Typicons, by Stephen Hutchings, licensed under CC BY-SA 3.0
 // - Feather, by Cole Bemis, licensed under MIT
 // - 60 Vicons, by Victor Erixon, licensed under WTFPL
+// - FontAwesome, by Dave Gandy, licensed under SIL OFL 1.1
 // ========================================
 
 @font-face {
   font-family: 'core-icons';
   src:
-    url('/fonts/core-icons.ttf?a4cyvk') format('truetype'),
-    url('/fonts/core-icons.woff?a4cyvk') format('woff'),
-    url('/fonts/core-icons.svg?a4cyvk#core-icons') format('svg');
+    url('/fonts/core-icons.ttf?e6rn1i') format('truetype'),
+    url('/fonts/core-icons.woff?e6rn1i') format('woff'),
+    url('/fonts/core-icons.svg?e6rn1i#core-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -35,6 +36,64 @@
 
 // Core-Icons Reference
 
+$icon-minus2: "\f068";
+$icon-font: "\f031";
+$icon-bold: "\f032";
+$icon-italic: "\f033";
+$icon-align-left2: "\f036";
+$icon-align-center2: "\f037";
+$icon-align-right2: "\f038";
+$icon-align-justify2: "\f039";
+$icon-list: "\f03a";
+$icon-video-camera2: "\f03d";
+$icon-image3: "\f03e";
+$icon-photo: "\f03e";
+$icon-picture-o: "\f03e";
+$icon-twitter-square: "\f081";
+$icon-facebook-square: "\f082";
+$icon-linkedin-square: "\f08c";
+$icon-github-square: "\f092";
+$icon-twitter: "\f099";
+$icon-facebook: "\f09a";
+$icon-facebook-f: "\f09a";
+$icon-github: "\f09b";
+$icon-chain: "\f0c1";
+$icon-link3: "\f0c1";
+$icon-bars: "\f0c9";
+$icon-navicon: "\f0c9";
+$icon-reorder: "\f0c9";
+$icon-list-ul: "\f0ca";
+$icon-list-ol: "\f0cb";
+$icon-strikethrough: "\f0cc";
+$icon-underline: "\f0cd";
+$icon-table: "\f0ce";
+$icon-linkedin: "\f0e1";
+$icon-file-text-o: "\f0f6";
+$icon-quote-left: "\f10d";
+$icon-terminal: "\f120";
+$icon-code: "\f121";
+$icon-youtube-play: "\f16a";
+$icon-dropbox: "\f16b";
+$icon-stack-overflow: "\f16c";
+$icon-bitbucket: "\f171";
+$icon-apple: "\f179";
+$icon-windows2: "\f17a";
+$icon-android: "\f17b";
+$icon-linux: "\f17c";
+$icon-vimeo-square: "\f194";
+$icon-slack: "\f198";
+$icon-google: "\f1a0";
+$icon-git-square: "\f1d2";
+$icon-git: "\f1d3";
+$icon-header: "\f1dc";
+$icon-safari: "\f267";
+$icon-chrome: "\f268";
+$icon-firefox: "\f269";
+$icon-opera: "\f26a";
+$icon-internet-explorer: "\f26b";
+$icon-vimeo: "\f27d";
+$icon-edge: "\f282";
+$icon-gitlab: "\f296";
 $icon-th-small: "\e900";
 $icon-th-menu: "\e901";
 $icon-th-list: "\e902";
@@ -311,6 +370,296 @@ $icon-home2: "\e98e";
 
 // CSS Classes
 
+.icon-minus2 {
+  &:before {
+    content: $icon-minus2;
+  }
+}
+.icon-font {
+  &:before {
+    content: $icon-font;
+  }
+}
+.icon-bold {
+  &:before {
+    content: $icon-bold;
+  }
+}
+.icon-italic {
+  &:before {
+    content: $icon-italic;
+  }
+}
+.icon-align-left2 {
+  &:before {
+    content: $icon-align-left2;
+  }
+}
+.icon-align-center2 {
+  &:before {
+    content: $icon-align-center2;
+  }
+}
+.icon-align-right2 {
+  &:before {
+    content: $icon-align-right2;
+  }
+}
+.icon-align-justify2 {
+  &:before {
+    content: $icon-align-justify2;
+  }
+}
+.icon-list {
+  &:before {
+    content: $icon-list;
+  }
+}
+.icon-video-camera2 {
+  &:before {
+    content: $icon-video-camera2;
+  }
+}
+.icon-image3 {
+  &:before {
+    content: $icon-image3;
+  }
+}
+.icon-photo {
+  &:before {
+    content: $icon-photo;
+  }
+}
+.icon-picture-o {
+  &:before {
+    content: $icon-picture-o;
+  }
+}
+.icon-twitter-square {
+  &:before {
+    content: $icon-twitter-square;
+  }
+}
+.icon-facebook-square {
+  &:before {
+    content: $icon-facebook-square;
+  }
+}
+.icon-linkedin-square {
+  &:before {
+    content: $icon-linkedin-square;
+  }
+}
+.icon-github-square {
+  &:before {
+    content: $icon-github-square;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
+  }
+}
+.icon-facebook {
+  &:before {
+    content: $icon-facebook;
+  }
+}
+.icon-facebook-f {
+  &:before {
+    content: $icon-facebook-f;
+  }
+}
+.icon-github {
+  &:before {
+    content: $icon-github;
+  }
+}
+.icon-chain {
+  &:before {
+    content: $icon-chain;
+  }
+}
+.icon-link3 {
+  &:before {
+    content: $icon-link3;
+  }
+}
+.icon-bars {
+  &:before {
+    content: $icon-bars;
+  }
+}
+.icon-navicon {
+  &:before {
+    content: $icon-navicon;
+  }
+}
+.icon-reorder {
+  &:before {
+    content: $icon-reorder;
+  }
+}
+.icon-list-ul {
+  &:before {
+    content: $icon-list-ul;
+  }
+}
+.icon-list-ol {
+  &:before {
+    content: $icon-list-ol;
+  }
+}
+.icon-strikethrough {
+  &:before {
+    content: $icon-strikethrough;
+  }
+}
+.icon-underline {
+  &:before {
+    content: $icon-underline;
+  }
+}
+.icon-table {
+  &:before {
+    content: $icon-table;
+  }
+}
+.icon-linkedin {
+  &:before {
+    content: $icon-linkedin;
+  }
+}
+.icon-file-text-o {
+  &:before {
+    content: $icon-file-text-o;
+  }
+}
+.icon-quote-left {
+  &:before {
+    content: $icon-quote-left;
+  }
+}
+.icon-terminal {
+  &:before {
+    content: $icon-terminal;
+  }
+}
+.icon-code {
+  &:before {
+    content: $icon-code;
+  }
+}
+.icon-youtube-play {
+  &:before {
+    content: $icon-youtube-play;
+  }
+}
+.icon-dropbox {
+  &:before {
+    content: $icon-dropbox;
+  }
+}
+.icon-stack-overflow {
+  &:before {
+    content: $icon-stack-overflow;
+  }
+}
+.icon-bitbucket {
+  &:before {
+    content: $icon-bitbucket;
+  }
+}
+.icon-apple {
+  &:before {
+    content: $icon-apple;
+  }
+}
+.icon-windows2 {
+  &:before {
+    content: $icon-windows2;
+  }
+}
+.icon-android {
+  &:before {
+    content: $icon-android;
+  }
+}
+.icon-linux {
+  &:before {
+    content: $icon-linux;
+  }
+}
+.icon-vimeo-square {
+  &:before {
+    content: $icon-vimeo-square;
+  }
+}
+.icon-slack {
+  &:before {
+    content: $icon-slack;
+  }
+}
+.icon-google {
+  &:before {
+    content: $icon-google;
+  }
+}
+.icon-git-square {
+  &:before {
+    content: $icon-git-square;
+  }
+}
+.icon-git {
+  &:before {
+    content: $icon-git;
+  }
+}
+.icon-header {
+  &:before {
+    content: $icon-header;
+  }
+}
+.icon-safari {
+  &:before {
+    content: $icon-safari;
+  }
+}
+.icon-chrome {
+  &:before {
+    content: $icon-chrome;
+  }
+}
+.icon-firefox {
+  &:before {
+    content: $icon-firefox;
+  }
+}
+.icon-opera {
+  &:before {
+    content: $icon-opera;
+  }
+}
+.icon-internet-explorer {
+  &:before {
+    content: $icon-internet-explorer;
+  }
+}
+.icon-vimeo {
+  &:before {
+    content: $icon-vimeo;
+  }
+}
+.icon-edge {
+  &:before {
+    content: $icon-edge;
+  }
+}
+.icon-gitlab {
+  &:before {
+    content: $icon-gitlab;
+  }
+}
 .icon-th-small {
   &:before {
     content: $icon-th-small;

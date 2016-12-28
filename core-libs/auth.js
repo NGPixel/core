@@ -119,18 +119,21 @@ module.exports = function(passport, appconfig) {
 
 	}
 
-	// Check for admin access
+	// Create users for first-time
 
 	db.onReady.then(() => {
 
 		db.User.count().then((c) => {
 			if(c < 1) {
+
+				// Create root admin account
+
 				winston.info('[AUTH] No administrator account found. Creating a new one...');
 				db.User.hashPassword('admin123').then((pwd) => {
 					return db.User.create({
 						provider: 'local',
 						email: appconfig.admin,
-						name: "Administrator",
+						name: 'Administrator',
 						password: pwd,
 						rights: [{
 							role: 'admin',
@@ -139,10 +142,30 @@ module.exports = function(passport, appconfig) {
 							deny: false
 						}]
 					});
+
 				}).then(() => {
 					winston.info('[AUTH] Administrator account created successfully!');
+				}).then(() => {
+
+					// Create guest account
+
+					return db.User.create({
+						provider: 'local',
+						email: 'guest',
+						name: 'Guest',
+						password: '',
+						rights: [{
+							role: 'read',
+							path: '/',
+							exact: false,
+							deny: !appconfig.public
+						}]
+					});
+
+				}).then(() => {
+					winston.info('[AUTH] Guest account created successfully!');
 				}).catch((err) => {
-					winston.error('[AUTH] An error occured while creating administrator account:');
+					winston.error('[AUTH] An error occured while creating administrator/guest account:');
 					winston.error(err);
 				});
 			}
