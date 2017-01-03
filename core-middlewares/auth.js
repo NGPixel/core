@@ -16,12 +16,21 @@ module.exports = (req, res, next) => {
 	// Is user authenticated ?
 
 	if (!req.isAuthenticated()) {
-		return res.redirect('/login');
+		if(req.app.locals.appconfig.public !== true) {
+			return res.redirect('/login');
+		} else {
+			req.user = rights.guest;
+			res.locals.isGuest = true;
+		}
+	} else {
+		res.locals.isGuest = false;
 	}
 
 	// Check permissions
 
-	if(!rights.check(req, 'read')) {
+	res.locals.rights = rights.check(req);
+
+	if(!res.locals.rights.read) {
 		return res.render('error-forbidden');
 	}
 

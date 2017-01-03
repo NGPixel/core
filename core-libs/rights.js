@@ -7,9 +7,55 @@ const _ = require('lodash');
  */
 module.exports = {
 
+	guest: {
+		provider : "local",
+		email : "guest",
+		name : "Guest",
+		password : "",
+		rights : [
+			{
+			    role : "read",
+			    path : "/",
+			    deny : false,
+			    exact : false
+			}
+		]
+	},
 
-	check(req, role) {
+	/**
+	 * Initialize Rights module
+	 *
+	 * @return     {void}  Void
+	 */
+	init() {
 
+		let self = this;
+
+		db.onReady.then(() => {
+			db.User.findOne({ provider: 'local', email: 'guest' }).then((u) => {
+				if(u) {
+					self.guest = u;
+				}
+			});
+		});
+
+	},
+
+	/**
+	 * Check user permissions for this request
+	 *
+	 * @param      {object}  req     The request object
+	 * @return     {object}  List of permissions for this request
+	 */
+	check(req) {
+
+		let self = this;
+
+		let perm = {
+			read: false,
+			write: false,
+			manage: false
+		}
 		let rt = [];
 		let p = _.chain(req.originalUrl).toLower().trim().value();
 
@@ -22,8 +68,29 @@ module.exports = {
 		// Is admin?
 
 		if(_.find(rt, { role: 'admin' })) {
-			return true;
+			perm.read = true;
+			perm.write = true;
+			perm.manage = true;
+		} else if(self.checkRole(p, rt, 'write')) {
+			perm.read = true;
+			perm.write = true;
+		} else if(self.checkRole(p, rt, 'read')) {
+			perm.read = true;
 		}
+
+		return perm;
+
+	},
+
+	/**
+	 * Check for a specific role based on list of user rights
+	 *
+	 * @param      {String}         p       Base path
+	 * @param      {array<object>}  rt      The user rights
+	 * @param      {string}         role    The minimum role required
+	 * @return     {boolean}        True if authorized
+	 */
+	checkRole(p, rt, role) {
 
 		// Check specific role on path
 
