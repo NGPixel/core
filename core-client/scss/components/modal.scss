@@ -128,6 +128,23 @@
 				margin-top: 0;
 			}
 
+			ul {
+				color: mc('grey', '800');
+				padding-left: 10px;
+
+				li {
+					margin-top: 5px;
+					display: flex;
+					align-items: center;
+
+					> i {
+						margin-right: 8px;
+						font-size: 18px;
+					}
+
+				}
+			}
+
 		}
 
 	}
