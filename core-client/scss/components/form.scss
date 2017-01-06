@@ -64,6 +64,10 @@
 			box-shadow: inset 0 0 5px 0 rgba(mc('light-blue', '500'), 0.3);
 		}
 
+		&:disabled {
+			background-color: mc('grey', '100');
+		}
+
 	}
 
 	// ===============================================================
