@@ -8,7 +8,6 @@ const modb = require('mongoose'),
 /**
  * MongoDB module
  *
- * @param      {Object}  appconfig  Application config
  * @return     {Object}  MongoDB wrapper instance
  */
 module.exports = {
@@ -16,10 +15,9 @@ module.exports = {
 	/**
 	 * Initialize DB
 	 *
-	 * @param      {Object}  appconfig  The application config
 	 * @return     {Object}  DB instance
 	 */
-	init(appconfig) {
+	init() {
 
 		let self = this;
 		global.Mongoose = modb;

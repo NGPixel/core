@@ -6,7 +6,7 @@ const WindowsLiveStrategy = require('passport-windowslive').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const _ = require('lodash');
 
-module.exports = function(passport, appconfig) {
+module.exports = function(passport) {
 
 	// Serialization user methods
 
@@ -29,7 +29,7 @@ module.exports = function(passport, appconfig) {
 
 	// Local Account
 
-	if(appconfig.auth.local && appconfig.auth.local.enabled) {
+	if(!appdata.capabilities.manyAuthProviders || appconfig.auth.local && appconfig.auth.local.enabled) {
 
 		passport.use('local',
 			new LocalStrategy({
@@ -57,7 +57,7 @@ module.exports = function(passport, appconfig) {
 
 	// Google ID
 
-	if(appconfig.auth.google && appconfig.auth.google.enabled) {
+	if(appdata.capabilities.manyAuthProviders && appconfig.auth.google && appconfig.auth.google.enabled) {
 
 		passport.use('google',
 			new GoogleStrategy({
@@ -78,7 +78,7 @@ module.exports = function(passport, appconfig) {
 
 	// Microsoft Accounts
 
-	if(appconfig.auth.microsoft && appconfig.auth.microsoft.enabled) {
+	if(appdata.capabilities.manyAuthProviders && appconfig.auth.microsoft && appconfig.auth.microsoft.enabled) {
 
 		passport.use('windowslive',
 			new WindowsLiveStrategy({
@@ -99,7 +99,7 @@ module.exports = function(passport, appconfig) {
 
 	// Facebook
 
-	if(appconfig.auth.facebook && appconfig.auth.facebook.enabled) {
+	if(appdata.capabilities.manyAuthProviders && appconfig.auth.facebook && appconfig.auth.facebook.enabled) {
 
 		passport.use('facebook',
 			new FacebookStrategy({
@@ -147,23 +147,29 @@ module.exports = function(passport, appconfig) {
 					winston.info('[AUTH] Administrator account created successfully!');
 				}).then(() => {
 
-					// Create guest account
+					if(appdata.capabilities.guest) {
 
-					return db.User.create({
-						provider: 'local',
-						email: 'guest',
-						name: 'Guest',
-						password: '',
-						rights: [{
-							role: 'read',
-							path: '/',
-							exact: false,
-							deny: !appconfig.public
-						}]
-					});
+						// Create guest account
 
-				}).then(() => {
-					winston.info('[AUTH] Guest account created successfully!');
+						return db.User.create({
+							provider: 'local',
+							email: 'guest',
+							name: 'Guest',
+							password: '',
+							rights: [{
+								role: 'read',
+								path: '/',
+								exact: false,
+								deny: !appconfig.public
+							}]
+						}).then(() => {
+							winston.info('[AUTH] Guest account created successfully!');
+						});
+
+					} else {
+						return true;
+					}
+
 				}).catch((err) => {
 					winston.error('[AUTH] An error occured while creating administrator/guest account:');
 					winston.error(err);

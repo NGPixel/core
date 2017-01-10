@@ -1,21 +1,28 @@
 "use strict";
 
-var fs = require('fs'),
-	yaml = require('js-yaml'),
-	_ = require('lodash');
+const fs = require('fs'),
+			yaml = require('js-yaml'),
+			_ = require('lodash');
 
 /**
  * Load Application Configuration
  *
- * @param      {String}  confPath  Path to the configuration file
+ * @param      {Object}  confPaths  Path to the configuration files
  * @return     {Object}  Application Configuration
  */
-module.exports = (confPath) => {
+module.exports = (confPaths) => {
 
-	var appconfig = {};
+	confPaths = _.defaults(confPaths, {
+		config: './config.yml',
+		data: './app/data.yml'
+	});
+
+	let appconfig = {};
+	let appdata = {};
 
 	try {
-		appconfig = yaml.safeLoad(fs.readFileSync(confPath, 'utf8'));
+		appconfig = yaml.safeLoad(fs.readFileSync(confPaths.config, 'utf8'));
+		appdata = yaml.safeLoad(fs.readFileSync(confPaths.data, 'utf8'));
 	} catch (ex) {
 		winston.error(ex);
 		process.exit(1);
@@ -23,37 +30,29 @@ module.exports = (confPath) => {
 
 	// Merge with defaults
 
-	appconfig = _.defaultsDeep(appconfig, {
-		title: "Wiki",
-		host: "http://localhost",
-		port: process.env.PORT,
-		uploads: {
-			maxImageFileSize: 3,
-			maxOtherFileSize: 100
-		},
-		auth: {
-			local: { enabled: true },
-			microsoft: { enabled: false },
-			google: { enabled: false },
-			facebook: { enabled: false },
-		},
-		db: "mongodb://localhost/wiki",
-		sessionSecret: null,
-		admin: null
-	});
+	appconfig = _.defaultsDeep(appconfig, appdata.defaults.config);
 
 	// List authentication strategies
 
-	appconfig.authStrategies = {
-		list: _.filter(appconfig.auth, ['enabled', true]),
-		socialEnabled: (_.chain(appconfig.auth).omit('local').reject({ enabled: false }).value().length > 0)
-	}
-	if(appconfig.authStrategies.list.length < 1) {
-		winston.error(new Error('You must enable at least 1 authentication strategy!'));
-		process.exit(1);
+	if(appdata.capabilities.manyAuthProviders) {
+		appconfig.authStrategies = {
+			list: _.filter(appconfig.auth, ['enabled', true]),
+			socialEnabled: (_.chain(appconfig.auth).omit('local').reject({ enabled: false }).value().length > 0)
+		}
+		if(appconfig.authStrategies.list.length < 1) {
+			winston.error(new Error('You must enable at least 1 authentication strategy!'));
+			process.exit(1);
+		}
+	} else {
+		appconfig.authStrategies = {
+			list: { local: { enabled: true }},
+			socialEnabled: false
+		}
 	}
 
-
-	return appconfig;
+	return {
+		config: appconfig,
+		data: appdata
+	};
 
 };
