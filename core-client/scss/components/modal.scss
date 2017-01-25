@@ -36,7 +36,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 }
 .modal-content {
 	animation: .3s ease zoomIn;
@@ -103,7 +102,7 @@
 	}
 
 	section {
-		padding: 10px;
+		padding: 20px;
 		border-top: 1px dotted mc('grey', '300');
 
 		&:first-of-type {
@@ -119,10 +118,70 @@
 			display: flex;
 		}
 
+		&.modal-loading {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			> i {
+				display: block;
+				@include spinner(mc('blue','500'), .4s, 32px);
+				margin-bottom: 10px;
+			}
+
+			> span {
+				color: mc('grey', '600');
+			}
+
+			> em {
+				font-size: 12px;
+				color: mc('grey', '500');
+				font-style: normal;
+			}
+
+		}
+
+		&.modal-instructions {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			color: mc('grey', '800');
+
+			img {
+				height: 100px;
+
+				& + * {
+					margin-top: 10px;
+				}
+
+			}
+
+			> span {
+				color: mc('grey', '800');
+			}
+
+			> em {
+				font-size: 12px;
+				color: mc('grey', '600');
+				font-style: normal;
+				margin-top: 10px;
+				display: block;
+			}
+
+		}
+
+		.bullets {
+			list-style-type: square;
+			padding: 5px 0 0 30px;
+			font-size: 14px;
+			color: mc('grey', '800');
+		}
+
 		.note {
 			display: block;
 			margin-top: 10px;
 			font-size: 14px;
+			color: mc('grey', '800');
 
 			&:first-child {
 				margin-top: 0;
