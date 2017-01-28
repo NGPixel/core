@@ -25,7 +25,7 @@
 
 #alerts {
 	position: fixed;
-	top: 5px;
+	top: 55px;
 	right: 10px;
 	width: 350px;
 	z-index: 2;
@@ -45,6 +45,7 @@
 			animation-name: slideFromRight;
 			animation-duration: 1s;
 			cursor: pointer;
+			position: relative;
 
 			&:hover {
 				background-color: material-color('blue-grey', '900');
@@ -55,6 +56,23 @@
 				animation-duration: 1s;
 				transform-origin: top center;
 			}
+
+			> button {
+        background-color: transparent;
+        border: none;
+        color: #FFF;
+        width: 15px;
+        height: 15px;
+        padding: 0;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        &:before {
+          content: 'X';
+        }
+
+      }
 
 			> strong {
 				display: block;
