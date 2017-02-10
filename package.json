@@ -1,6 +1,6 @@
 {
   "name": "requarks-core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Shared classes, libraries and assets used in Requarks applications",
   "main": "index.js",
   "scripts": {
