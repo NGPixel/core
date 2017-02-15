@@ -169,6 +169,29 @@
 			margin-left: 10px;
 		}
 
+		.section-block {
+			padding-left: 20px;
+			font-size: 14px;
+			color: mc('blue-grey', '800');
+
+			h6 {
+				font-size: 14px;
+				font-weight: 500;
+				color: mc('blue-grey', '600');
+				margin-top: 15px;
+				border-bottom: 1px dotted mc('blue-grey', '200');
+			}
+
+			p {
+				padding: 5px 0;
+
+				&.is-small {
+					font-size: 13px;
+				}
+
+			}
+		}
+
 	}
 
 }
