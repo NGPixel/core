@@ -1,118 +1,114 @@
-"use strict";
+'use strict'
+
+/* global Vue, _ */
 
 /**
  * Alerts
  */
-class Alerts {
+class Alerts { // eslint-disable-line no-unused-vars
 
-	/**
-	 * Constructor
-	 *
-	 * @class
-	 */
-	constructor() {
+  /**
+   * Constructor
+   *
+   * @class
+   */
+  constructor () {
+    let self = this
 
-		let self = this;
+    self.mdl = new Vue({
+      el: '#alerts',
+      data: {
+        children: []
+      },
+      methods: {
+        acknowledge: (uid) => {
+          self.close(uid)
+        }
+      }
+    })
 
-		self.mdl = new Vue({
-			el: '#alerts',
-			data: {
-				children: []
-			},
-			methods: {
-				acknowledge: (uid) => {
-					self.close(uid);
-				}
-			}
-		});
+    self.uidNext = 1
+  }
 
-		self.uidNext = 1;
+  /**
+   * Show a new Alert
+   *
+   * @param      {Object}  options  Alert properties
+   * @return     {null}  Void
+   */
+  push (options) {
+    let self = this
 
-	}
+    let nAlert = _.defaults(options, {
+      _uid: self.uidNext,
+      class: 'info',
+      iconClass: 'fa-info',
+      message: '---',
+      sticky: false,
+      title: '---'
+    })
 
-	/**
-	 * Show a new Alert
-	 *
-	 * @param      {Object}  options  Alert properties
-	 * @return     {null}  Void
-	 */
-	push(options) {
+    self.mdl.children.push(nAlert)
 
-		let self = this;
+    if (!nAlert.sticky) {
+      _.delay(() => {
+        self.close(nAlert._uid)
+      }, 5000)
+    }
 
-		let nAlert = _.defaults(options, {
-			_uid: self.uidNext,
-			class: 'info',
-			iconClass: 'fa-info',
-			message: '---',
-			sticky: false,
-			title: '---'
-		});
+    self.uidNext++
+  }
 
-		self.mdl.children.push(nAlert);
+  /**
+   * Shorthand method for pushing errors
+   *
+   * @param      {String}  title    The title
+   * @param      {String}  message  The message
+   */
+  pushError (title, message) {
+    this.push({
+      class: 'error',
+      iconClass: 'fa-warning',
+      message,
+      sticky: false,
+      title
+    })
+  }
 
-		if(!nAlert.sticky) {
-			_.delay(() => {
-				self.close(nAlert._uid);
-			}, 5000);
-		}
+  /**
+   * Shorthand method for pushing success messages
+   *
+   * @param      {String}  title    The title
+   * @param      {String}  message  The message
+   */
+  pushSuccess (title, message) {
+    this.push({
+      class: 'success',
+      iconClass: 'fa-check',
+      message,
+      sticky: false,
+      title
+    })
+  }
 
-		self.uidNext++;
+  /**
+   * Close an alert
+   *
+   * @param      {Integer}  uid     The unique ID of the alert
+   */
+  close (uid) {
+    let self = this
 
-	}
+    let nAlertIdx = _.findIndex(self.mdl.children, ['_uid', uid])
+    let nAlert = _.nth(self.mdl.children, nAlertIdx)
 
-	/**
-	 * Shorthand method for pushing errors
-	 *
-	 * @param      {String}  title    The title
-	 * @param      {String}  message  The message
-	 */
-	pushError(title, message) {
-		this.push({
-			class: 'error',
-			iconClass: 'fa-warning',
-			message,
-			sticky: false,
-			title
-		});
-	}
-
-	/**
-	 * Shorthand method for pushing success messages
-	 *
-	 * @param      {String}  title    The title
-	 * @param      {String}  message  The message
-	 */
-	pushSuccess(title, message) {
-		this.push({
-			class: 'success',
-			iconClass: 'fa-check',
-			message,
-			sticky: false,
-			title
-		});
-	}
-
-	/**
-	 * Close an alert
-	 *
-	 * @param      {Integer}  uid     The unique ID of the alert
-	 */
-	close(uid) {
-
-		let self = this;
-
-		let nAlertIdx = _.findIndex(self.mdl.children, ['_uid', uid]);
-		let nAlert = _.nth(self.mdl.children, nAlertIdx);
-
-		if(nAlertIdx >= 0 && nAlert) {
-			nAlert.class += ' exit';
-			self.mdl.children.$set(nAlertIdx, nAlert);
-			_.delay(() => {
-				self.mdl.children.$remove(nAlert);
-			}, 500);
-		}
-
-	}
+    if (nAlertIdx >= 0 && nAlert) {
+      nAlert.class += ' exit'
+      self.mdl.children.$set(nAlertIdx, nAlert)
+      _.delay(() => {
+        self.mdl.children.$remove(nAlert)
+      }, 500)
+    }
+  }
 
 }

@@ -176,15 +176,15 @@ a {
 			}
 
 			&.ms {
-				background-color: mc('teal','600');
-				border-color: lighten(mc('teal','600'), 10%);
+				background-color: mc('blue','600');
+				border-color: lighten(mc('blue','600'), 10%);
 
 				&:focus {
 					border-color: #FFF;
 				}
 
 				&:hover {
-					background-color: darken(mc('teal','600'), 10%);
+					background-color: darken(mc('blue','600'), 10%);
 				}
 
 			}
@@ -204,17 +204,43 @@ a {
 			}
 
 			&.facebook {
-				background-color: mc('purple','600');
-				border-color: lighten(mc('purple','600'), 10%);
+				background-color: mc('indigo','600');
+				border-color: lighten(mc('indigo','600'), 10%);
 
 				&:focus {
 					border-color: #FFF;
 				}
 
 				&:hover {
-					background-color: darken(mc('purple','600'), 10%);
+					background-color: darken(mc('indigo','600'), 10%);
 				}
 
+			}
+
+      &.github {
+				background-color: mc('blue-grey','700');
+				border-color: lighten(mc('blue-grey','700'), 10%);
+
+				&:focus {
+					border-color: #FFF;
+				}
+
+				&:hover {
+					background-color: darken(mc('blue-grey','700'), 10%);
+				}
+			}
+
+      &.slack {
+				background-color: mc('purple','700');
+				border-color: lighten(mc('purple','700'), 10%);
+
+				&:focus {
+					border-color: #FFF;
+				}
+
+				&:hover {
+					background-color: darken(mc('purple','700'), 10%);
+				}
 			}
 
 		}

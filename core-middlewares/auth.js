@@ -1,7 +1,8 @@
-"use strict";
+'use strict'
 
-var Promise = require('bluebird'),
-	moment = require('moment-timezone');
+/* global appdata, rights */
+
+const moment = require('moment-timezone')
 
 /**
  * Authentication middleware
@@ -12,40 +13,38 @@ var Promise = require('bluebird'),
  * @return     {any}               void
  */
 module.exports = (req, res, next) => {
+  // Is user authenticated ?
 
-	// Is user authenticated ?
+  if (!req.isAuthenticated()) {
+    if (!appdata.capabilities.guest || req.app.locals.appconfig.public !== true) {
+      return res.redirect('/login')
+    } else {
+      req.user = rights.guest
+      res.locals.isGuest = true
+    }
+  } else if (appdata.capabilities.guest) {
+    res.locals.isGuest = false
+  }
 
-	if (!req.isAuthenticated()) {
-		if(!appdata.capabilities.guest || req.app.locals.appconfig.public !== true) {
-			return res.redirect('/login');
-		} else {
-			req.user = rights.guest;
-			res.locals.isGuest = true;
-		}
-	} else if(appdata.capabilities.guest) {
-		res.locals.isGuest = false;
-	}
+  // Check permissions
 
-	// Check permissions
+  if (appdata.capabilities.rights) {
+    res.locals.rights = rights.check(req)
 
-	if(appdata.capabilities.rights) {
-		res.locals.rights = rights.check(req);
+    if (!res.locals.rights.read) {
+      return res.render('error-forbidden')
+    }
+  }
 
-		if(!res.locals.rights.read) {
-			return res.render('error-forbidden');
-		}
-	}
+  // Set i18n locale
 
-	// Set i18n locale
+  req.i18n.changeLanguage(req.user.lang)
+  res.locals.userMoment = moment
+  res.locals.userMoment.locale(req.user.lang)
 
-	req.i18n.changeLanguage(req.user.lang);
-	res.locals.userMoment = moment;
-	res.locals.userMoment.locale(req.user.lang);
+  // Expose user data
 
-	// Expose user data
+  res.locals.user = req.user
 
-	res.locals.user = req.user;
-
-	return next();
-
-};
+  return next()
+}

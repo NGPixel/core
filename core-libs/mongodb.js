@@ -1,9 +1,11 @@
-"use strict";
+'use strict'
 
-const modb = require('mongoose'),
-			fs   = require("fs"),
-			path = require("path"),
-			_ = require('lodash');
+/* global ROOTPATH, appconfig, winston */
+
+const modb = require('mongoose')
+const fs = require('fs')
+const path = require('path')
+const _ = require('lodash')
 
 /**
  * MongoDB module
@@ -12,52 +14,51 @@ const modb = require('mongoose'),
  */
 module.exports = {
 
-	/**
-	 * Initialize DB
-	 *
-	 * @return     {Object}  DB instance
-	 */
-	init() {
+  /**
+   * Initialize DB
+   *
+   * @return     {Object}  DB instance
+   */
+  init () {
+    let self = this
+    global.Mongoose = modb
 
-		let self = this;
-		global.Mongoose = modb;
+    let dbModelsPath = path.resolve(ROOTPATH, 'models')
 
-		let dbModelsPath = path.resolve(ROOTPATH, 'models');
+    modb.Promise = require('bluebird')
 
-		modb.Promise = require('bluebird');
+    // Event handlers
 
-		// Event handlers
+    modb.connection.on('error', err => {
+      winston.error('Failed to connect to MongoDB instance.')
+      return err
+    })
+    modb.connection.once('open', function () {
+      winston.log('Connected to MongoDB instance.')
+    })
 
-		modb.connection.on('error', (err) => {
-			winston.error('Failed to connect to MongoDB instance.');
-		});
-		modb.connection.once('open', function() {
-			winston.log('Connected to MongoDB instance.');
-		});
+    // Store connection handle
 
-		// Store connection handle
+    self.connection = modb.connection
+    self.ObjectId = modb.Types.ObjectId
 
-		self.connection = modb.connection;
-		self.ObjectId = modb.Types.ObjectId;
+    // Load DB Models
 
-		// Load DB Models
+    fs
+    .readdirSync(dbModelsPath)
+    .filter(function (file) {
+      return (file.indexOf('.') !== 0)
+    })
+    .forEach(function (file) {
+      let modelName = _.upperFirst(_.camelCase(_.split(file, '.')[0]))
+      self[modelName] = require(path.join(dbModelsPath, file))
+    })
 
-		fs
-		.readdirSync(dbModelsPath)
-		.filter(function(file) {
-			return (file.indexOf(".") !== 0);
-		})
-		.forEach(function(file) {
-			let modelName = _.upperFirst(_.camelCase(_.split(file,'.')[0]));
-			self[modelName] = require(path.join(dbModelsPath, file));
-		});
+    // Connect
 
-		// Connect
+    self.onReady = modb.connect(appconfig.db)
 
-		self.onReady = modb.connect(appconfig.db);
+    return self
+  }
 
-		return self;
-
-	}
-
-};
+}
