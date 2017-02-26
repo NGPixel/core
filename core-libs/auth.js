@@ -8,7 +8,7 @@ const WindowsLiveStrategy = require('passport-windowslive').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
 const GitHubStrategy = require('passport-github2').Strategy
 const SlackStrategy = require('passport-slack').Strategy
-const LDAPStrategy = require('passport-ldapauth').Strategy
+const LdapStrategy = require('passport-ldapauth').Strategy
 
 module.exports = function (passport) {
   // Serialization user methods
@@ -144,6 +144,24 @@ module.exports = function (passport) {
         callbackURL: appconfig.host + '/login/slack/callback'
       },
       (accessToken, refreshToken, profile, cb) => {
+        db.User.processProfile(profile).then((user) => {
+          return cb(null, user) || true
+        }).catch((err) => {
+          return cb(err, null) || true
+        })
+      }
+    ))
+  }
+
+  // LDAP
+
+  if (appdata.capabilities.manyAuthProviders && appconfig.auth.ldap && appconfig.auth.ldap.enabled) {
+    passport.use('ldapauth',
+      new LdapStrategy({
+        server: appconfig.auth.ldap.server,
+        passReqToCallback: false
+      },
+      (profile, cb) => {
         db.User.processProfile(profile).then((user) => {
           return cb(null, user) || true
         }).catch((err) => {
