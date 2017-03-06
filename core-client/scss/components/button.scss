@@ -76,11 +76,17 @@
 		animation: btnInvertedPulse .6s ease alternate infinite;
 	}
 
-	&.is-disabled {
+	&.is-disabled, &:disabled {
 		background-color: mc('grey', '300');
 		border: 1px solid mc('grey','400');
 		color: mc('grey', '500');
-		cursor: no-drop;
+		cursor: default;
+    transition: none;
+
+    &:hover {
+      background-color: mc('grey', '300') !important;
+      color: mc('grey', '500') !important;
+    }
 	}
 
 }
