@@ -9,6 +9,7 @@ const FacebookStrategy = require('passport-facebook').Strategy
 const GitHubStrategy = require('passport-github2').Strategy
 const SlackStrategy = require('passport-slack').Strategy
 const LdapStrategy = require('passport-ldapauth').Strategy
+const fs = require('fs')
 
 module.exports = function (passport) {
   // Serialization user methods
@@ -47,7 +48,7 @@ module.exports = function (passport) {
               return done(err, null)
             })
           } else {
-            return done(new Error('Invalid Login'), null)
+            return done(new Error('INVALID_LOGIN'), null)
           }
         }).catch((err) => {
           done(err, null)
@@ -158,10 +159,25 @@ module.exports = function (passport) {
   if (appdata.capabilities.manyAuthProviders && appconfig.auth.ldap && appconfig.auth.ldap.enabled) {
     passport.use('ldapauth',
       new LdapStrategy({
-        server: appconfig.auth.ldap.server,
+        server: {
+          url: appconfig.auth.ldap.url,
+          bindDn: appconfig.auth.ldap.bindDn,
+          bindCredentials: appconfig.auth.ldap.bindCredentials,
+          searchBase: appconfig.auth.ldap.searchBase,
+          searchFilter: appconfig.auth.ldap.searchFilter,
+          searchAttributes: ['displayName', 'name', 'cn', 'mail'],
+          tlsOptions: (appconfig.auth.ldap.tlsEnabled) ? {
+            ca: [
+              fs.readFileSync(appconfig.auth.ldap.tlsCertPath)
+            ]
+          } : {}
+        },
+        usernameField: 'email',
         passReqToCallback: false
       },
       (profile, cb) => {
+        profile.provider = 'ldap'
+        profile.id = profile.dn
         db.User.processProfile(profile).then((user) => {
           return cb(null, user) || true
         }).catch((err) => {
