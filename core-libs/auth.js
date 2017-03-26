@@ -190,7 +190,7 @@ module.exports = function (passport) {
   // Create users for first-time
 
   db.onReady.then(() => {
-    db.User.count().then((c) => {
+    db.User.findOne({ provider: 'local', email: 'guest' }).then((c) => {
       if (c < 1) {
         // Create root admin account
 
